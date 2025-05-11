@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
-
+  console.log("code:", code);
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.redirect(new URL("/?refresh=true", request.url));
 }

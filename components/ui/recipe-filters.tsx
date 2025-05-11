@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import React from "react";
 
 interface RecipeFiltersProps {
   onFilterChange: (filters: {
@@ -32,9 +33,15 @@ export function RecipeFilters({ onFilterChange }: RecipeFiltersProps) {
     getUser();
   }, [supabase.auth]);
 
+  // Use a callback ref to avoid dependency on onFilterChange
+  const onFilterChangeRef = React.useRef(onFilterChange);
+  React.useEffect(() => {
+    onFilterChangeRef.current = onFilterChange;
+  }, [onFilterChange]);
+
   useEffect(() => {
-    onFilterChange({ ownership, category });
-  }, [ownership, category, onFilterChange]);
+    onFilterChangeRef.current({ ownership, category });
+  }, [ownership, category]);
 
   return (
     <div className="flex flex-wrap items-center gap-4 mb-8">
