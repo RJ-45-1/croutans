@@ -21,4 +21,13 @@ export interface Recipe {
   category: RecipeCategory | null;
   duration: number | null;
   created_at: string | null; // Timestamp as string
-} 
+}
+
+export interface RecipeCardInfo {
+  id: number;
+  title: string;
+  uri: string | null;
+  author_username: string | null;
+  category: RecipeCategory | null;
+  duration: number | null;
+}

@@ -6,17 +6,13 @@ import { Label } from "@/components/ui/label";
 import { createClient } from "@/utils/supabase/client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { signIn } from "./actions";
 
 export function SignInForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    console.log("Loading: ", isLoading);
-  }, [isLoading]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // Prevent the default form submission
@@ -28,6 +24,7 @@ export function SignInForm() {
       const result = await signIn(formData);
       if (result?.error) {
         toast.error(result.error);
+        setIsLoading(false);
       } else {
         router.push("/");
         router.refresh();
@@ -35,7 +32,6 @@ export function SignInForm() {
     } catch (err) {
       toast.error("An unexpected error occurred");
     } finally {
-      setIsLoading(false);
     }
   }
 
@@ -87,7 +83,9 @@ export function SignInForm() {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email" className="flex justify-start">Email</Label>
+            <Label htmlFor="email" className="flex justify-start">
+              Email
+            </Label>
             <Input
               id="email"
               name="email"
@@ -102,7 +100,9 @@ export function SignInForm() {
           </div>
           <div className="grid gap-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password" className="flex justify-start">Password</Label>
+              <Label htmlFor="password" className="flex justify-start">
+                Password
+              </Label>
             </div>
             <Input
               id="password"

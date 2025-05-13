@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { User, LogOut, Settings } from "lucide-react";
+import { User, LogOut, Settings, Book } from "lucide-react";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -56,6 +56,13 @@ export default function UserDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuItem
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => router.push("/recipe")}
+        >
+          <Book className="h-4 w-4" />
+          <span>All recipes</span>
+        </DropdownMenuItem>
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => router.push("/account")}

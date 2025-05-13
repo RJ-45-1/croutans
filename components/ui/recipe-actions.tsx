@@ -27,7 +27,6 @@ export function RecipeActions({ recipeId, recipeImageUrl }: RecipeActionsProps) 
   const supabase = createClient();
 
   const handleDelete = async () => {
-
     try {
       // Delete the recipe image from storage if it exists
       if (recipeImageUrl) {
@@ -60,7 +59,7 @@ export function RecipeActions({ recipeId, recipeImageUrl }: RecipeActionsProps) 
       <Button
         variant="outline"
         size="icon"
-        onClick={() => router.push(`/recipe/${recipeId}/edit`)}
+        onClick={() => router.push(`/recipe/edit/${recipeId}`)}
       >
         <Edit className="h-4 w-4" />
       </Button>
