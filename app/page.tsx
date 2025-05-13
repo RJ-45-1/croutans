@@ -3,10 +3,14 @@ import { NewRecipeDialog } from "@/components/ui/new-recipe-dialog";
 import { createClient } from "@/utils/supabase/server";
 import { ChefHat } from "lucide-react";
 import type { RecipeCardInfo } from "./types/recipe";
-
+import { redirect } from "next/navigation";
 export default async function Home() {
   const supabase = await createClient();
 
+  const { data: { user } } = await supabase.auth.getUser();
+  if(!user){
+    redirect("/auth/signin");
+  }
   const { data } = await supabase
     .from("recipes")
     .select("id, title, author_username, uri, duration, category")

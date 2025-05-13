@@ -22,7 +22,7 @@ export default function UserDropdown() {
   useEffect(() => {
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      setAvatarUrl(user?.user_metadata?.avatar_url || null);
+      setAvatarUrl(user?.user_metadata?.user_avatar_url ?? user?.user_metadata?.avatar_url ?? null);
     };
     getUser();
   }, [supabase.auth]);

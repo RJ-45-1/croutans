@@ -85,7 +85,7 @@ export function UserInfoForm() {
       const { error: updateError } = await supabase.auth.updateUser({
         data: {
           username,
-          avatar_url: avatarUrl
+          user_avatar_url: avatarUrl
         }
       });
 
