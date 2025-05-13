@@ -39,11 +39,7 @@ export const updateSession = async (request: NextRequest) => {
     // https://supabase.com/docs/guides/auth/server-side/nextjs
     const { data: { user } } = await supabase.auth.getUser();
 
-    // Check if user exists and has a username in metadata
-    if (user && !user.user_metadata?.username) {
-      // Redirect to signup page if no username is set
-      return NextResponse.redirect(new URL('/auth/signup/user-infos', request.url));
-    }
+
 
     return response;
   } catch (e) {

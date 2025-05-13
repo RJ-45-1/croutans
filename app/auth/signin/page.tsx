@@ -30,8 +30,14 @@ export default async function SignInPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Choose a way to connect to Croutans
+          <p className="text-md text-muted-foreground">
+            To create an accout{" "}
+            <Link
+              href="/auth/signup"
+              className="hover:text-brand underline underline-offset-4"
+            >
+              Click here
+            </Link>
           </p>
 
           <SignInForm />

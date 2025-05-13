@@ -44,7 +44,7 @@ export function SignInForm() {
           access_type: "offline",
           prompt: "consent",
         },
-        redirectTo: `${process.env.NEXT_PUBLIC_URL!}/auth/callback`,
+        redirectTo: `${process.env.NEXT_PUBLIC_URL!}/auth/test`,
       },
     });
     console.log("data: ", data);
@@ -53,8 +53,8 @@ export function SignInForm() {
     }
   }
   return (
-    <div className="grid gap-6">
-      <div className="flex flex-col ">
+    <div className="grid gap-6 pt-4">
+      {/* <div className="flex flex-col ">
         <Button
           variant="outline"
           className="w-full space-x-2"
@@ -79,7 +79,7 @@ export function SignInForm() {
         <span className="relative z-10 bg-background px-2 text-muted-foreground">
           Or continue with
         </span>
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">

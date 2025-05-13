@@ -54,8 +54,8 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="grid gap-6">
-      <div className="flex flex-col ">
+    <div className="grid gap-6 pt-6">
+      {/* <div className="flex flex-col ">
         <Button
           variant="outline"
           className="w-full"
@@ -80,11 +80,13 @@ export function SignUpForm() {
         <span className="relative z-10 bg-background px-2 text-muted-foreground">
           Or continue with
         </span>
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email" className="flex justify-start">Email</Label>
+            <Label htmlFor="email" className="flex justify-start">
+              Email
+            </Label>
             <Input
               id="email"
               name="email"
@@ -98,7 +100,9 @@ export function SignUpForm() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password" className="flex justify-start">Password</Label>
+            <Label htmlFor="password" className="flex justify-start">
+              Password
+            </Label>
             <Input
               id="password"
               name="password"
