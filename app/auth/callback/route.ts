@@ -8,8 +8,12 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
+    const { data: { user } } = await supabase.auth.getUser();
+    if(!user?.user_metadata?.username){
+      return NextResponse.redirect(new URL("/auth/signup/user-infos", request.url));
+    }
   }
-  console.log("code:", code);
+  
   // URL to redirect to after sign in process completes
   return NextResponse.redirect(new URL("/?refresh=true", request.url));
 }
