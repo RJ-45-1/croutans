@@ -5,8 +5,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*",
+        hostname: "*.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "*.supabase.com",
+      },
+      // Add specific hostname from environment variable if available
+      ...(process.env.NEXT_PUBLIC_SUPABASE_URL 
+        ? [{
+            protocol: "https" as const,
+            hostname: process.env.NEXT_PUBLIC_SUPABASE_URL.replace('https://', '').replace('http://', ''),
+          }]
+        : []),
     ],
   },
 };

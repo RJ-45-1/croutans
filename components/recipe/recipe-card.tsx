@@ -6,6 +6,11 @@ import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function RecipeCard({ recipe }: { recipe: RecipeCardInfo }) {
+  // Debug log for image URL in development
+  if (process.env.NODE_ENV === 'development' && recipe.uri) {
+    console.log('Recipe image URL:', recipe.uri);
+  }
+
   return (
     <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col">
       <Link
@@ -16,10 +21,18 @@ export default function RecipeCard({ recipe }: { recipe: RecipeCardInfo }) {
         {recipe.uri ? (
           <div className="relative aspect-[4/3]">
             <Image
-              src={recipe.uri || "/placeholder.svg"}
+              src={recipe.uri}
               alt={recipe.title}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
+              onError={(e) => {
+                console.error('Image failed to load:', recipe.uri);
+                // Hide the image container on error
+                if (e.currentTarget.parentElement) {
+                  e.currentTarget.parentElement.style.display = 'none';
+                }
+              }}
+              unoptimized={process.env.NODE_ENV === 'development'}
             />
           </div>
         ) : (
