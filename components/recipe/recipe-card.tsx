@@ -5,40 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
 
 export default function RecipeCard({ recipe }: { recipe: RecipeCardInfo }) {
+  const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
-  
-  // Debug log for image URL in development
-  if (process.env.NODE_ENV === 'development' && recipe.uri) {
-    console.log('Recipe image URL:', recipe.uri);
-  }
 
-  // Function to test if image URL is accessible
-  const testImageUrl = async (url: string) => {
-    try {
-      const response = await fetch(url, { method: 'HEAD' });
-      console.log(`Image URL test for ${url}:`, {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries())
-      });
-      return response.ok;
-    } catch (error) {
-      console.error(`Image URL test failed for ${url}:`, error);
-      return false;
-    }
+  const handleImageLoad = () => {
+    setImageLoading(false);
   };
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    console.error('Image failed to load:', recipe.uri);
+  const handleImageError = () => {
+    setImageLoading(false);
     setImageError(true);
-    
-    // Test the URL directly in development
-    if (process.env.NODE_ENV === 'development' && recipe.uri) {
-      testImageUrl(recipe.uri);
-    }
   };
 
   return (
@@ -50,11 +30,19 @@ export default function RecipeCard({ recipe }: { recipe: RecipeCardInfo }) {
       >
         {recipe.uri && !imageError ? (
           <div className="relative aspect-[4/3]">
+            {imageLoading && (
+              <Skeleton className="absolute inset-0 flex items-center justify-center">
+                <ChefHat className="w-12 h-12 opacity-20" />
+              </Skeleton>
+            )}
             <Image
               src={recipe.uri}
               alt={recipe.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                imageLoading ? 'opacity-0' : 'opacity-100'
+              }`}
+              onLoad={handleImageLoad}
               onError={handleImageError}
               unoptimized={true}
               priority={false}
@@ -63,11 +51,6 @@ export default function RecipeCard({ recipe }: { recipe: RecipeCardInfo }) {
         ) : (
           <div className="bg-muted aspect-[4/3] flex items-center justify-center text-muted-foreground">
             <ChefHat className="w-12 h-12 opacity-20" />
-            {imageError && (
-              <div className="absolute text-xs text-red-500 mt-16 px-2 text-center">
-                Failed to load image
-              </div>
-            )}
           </div>
         )}
         <div className="flex flex-col flex-grow">

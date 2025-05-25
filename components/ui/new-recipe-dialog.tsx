@@ -93,6 +93,28 @@ export function NewRecipeDialog() {
     setSteps(newSteps);
   };
 
+  // Check if all required fields are filled
+  const isFormValid = () => {
+    // Check if title, category, and duration are filled
+    if (!title.trim() || !category || !duration.trim()) {
+      return false;
+    }
+
+    // Check if at least one ingredient has both name and quantity
+    const validIngredients = ingredients.filter(i => i.name.trim() && i.quantity.trim());
+    if (validIngredients.length === 0) {
+      return false;
+    }
+
+    // Check if at least one step has description
+    const validSteps = steps.filter(s => s.description.trim());
+    if (validSteps.length === 0) {
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
@@ -130,6 +152,7 @@ export function NewRecipeDialog() {
         uri: imageUrl,
         ingredients: ingredients.filter(i => i.name && i.quantity),
         steps: steps.filter(s => s.description),
+        author_username: user.user_metadata.username,
       });
 
       if (error) throw error;
@@ -313,7 +336,7 @@ export function NewRecipeDialog() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading || !isFormValid()}>
               {isLoading ? "Creating..." : "Create Recipe"}
             </Button>
           </DialogFooter>
