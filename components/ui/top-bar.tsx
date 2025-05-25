@@ -26,6 +26,8 @@ export default async function TopBar() {
           alt="Croutans"
           width={42}
           height={42}
+          unoptimized={true}
+          priority={false}
         />
       </Link>
 
@@ -35,7 +37,7 @@ export default async function TopBar() {
           className="text-3xl lg:text-5xl font-bold text-center"
           style={{ fontFamily: "'Dancing Script', cursive" }}
         >
-          The croutans
+          The Croutans
         </h1>
       </div>
 
