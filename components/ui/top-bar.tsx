@@ -29,7 +29,7 @@ export default async function TopBar() {
           unoptimized={true}
           priority={false}
         />
-        <span className="text-lg font-medium">Home</span>
+        <span className="text-lg font-medium hidden md:block ">Home</span>
       </Link>
 
       {/* Title in the center - hidden on very small screens */}
