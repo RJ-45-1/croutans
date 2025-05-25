@@ -6,20 +6,22 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
       },
       {
         protocol: "https",
         hostname: "*.supabase.com",
+        pathname: "/storage/v1/object/public/**",
       },
-      // Add specific hostname from environment variable if available
-      ...(process.env.NEXT_PUBLIC_SUPABASE_URL 
-        ? [{
-            protocol: "https" as const,
-            hostname: process.env.NEXT_PUBLIC_SUPABASE_URL.replace('https://', '').replace('http://', ''),
-          }]
-        : []),
+      // Add the specific project hostname
+      {
+        protocol: "https",
+        hostname: "jowvqllgpmgmsqddybxg.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
   },
 };
 
 export default nextConfig;
+
