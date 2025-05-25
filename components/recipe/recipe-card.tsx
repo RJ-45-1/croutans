@@ -1,3 +1,4 @@
+"use client"
 import { RecipeCardInfo } from "@/app/types/recipe";
 import { ChefHat, Clock, User } from "lucide-react";
 import Image from "next/image";
