@@ -24,11 +24,12 @@ export default async function TopBar() {
         <Image
           src="https://jowvqllgpmgmsqddybxg.supabase.co/storage/v1/object/public/recipes//little-logo.png"
           alt="Croutans"
-          width={42}
-          height={42}
+          width={64}
+          height={64}
           unoptimized={true}
           priority={false}
         />
+        <span className="text-lg font-medium">Home</span>
       </Link>
 
       {/* Title in the center - hidden on very small screens */}
