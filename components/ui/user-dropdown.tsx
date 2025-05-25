@@ -46,6 +46,8 @@ export default function UserDropdown() {
               src={avatarUrl}
               alt="User avatar"
               fill
+              unoptimized={true}
+              priority={false}
               className="rounded-full object-cover p-1"
             />
           ) : (

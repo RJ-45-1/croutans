@@ -46,7 +46,8 @@ async function RecipeContent({ id }: { id: string }) {
                   alt={recipe.title}
                   fill
                   className="object-cover"
-                  priority
+                  unoptimized={true}
+                  priority={false}
                 />
               </div>
             </Card>

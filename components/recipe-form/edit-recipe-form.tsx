@@ -170,6 +170,8 @@ export default function EditRecipeForm({ recipe: initialRecipe }: EditRecipeForm
                       alt="Recipe preview"
                       fill
                       className="object-cover rounded-lg"
+                      unoptimized={true}
+                      priority={false}
                     />
                     <Button
                       type="button"
